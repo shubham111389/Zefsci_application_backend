@@ -17,6 +17,7 @@ const user = new User(req.body);
   try {
     await user.save();
     res.send("User Added successfully!");
+    
   } catch (err) {
     res.status(400).send("Error saving the user:" + err.message);
   }
@@ -31,4 +32,5 @@ connectDB()
   })
   .catch((err) => {
     console.error("Database cannot be connected!!");
+    console.error(err);
   });
