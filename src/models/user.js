@@ -3,36 +3,62 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
+    required: [true, "First name is required"],
+    trim: true,
+    minLength: [2, "First name must be at least 2 characters"],
   },
   lastName: {
     type: String,
+    required: [true, "Last name is required"],
+    trim: true,
+    minLength: [2, "Last name must be at least 2 characters"],
   },
   emailId: {
     type: String,
+    required: [true, "Email ID is required"],
+    unique: true,
+    lowercase: true,
+    trim: true,
+    match: [/\S+@\S+\.\S+/, "Please enter a valid email address"],
   },
   password: {
     type: String,
+    required: [true, "Password is required"],
+    minLength: [6, "Password must be at least 6 characters"],
   },
   profession: {
     type: Number,
+    default: 0,
+    min: [0, "Profession value cannot be negative"],
   },
   gender: {
     type: String,
+    enum: ["Male", "Female", "Other"],
+    required: [true, "Gender is required"],
   },
-  region:{
-    type:String,
+  region: {
+    type: String,
+    trim: true,
+    required: [true, "Region is required"],
   },
   joinedDate: {
-    type:Date ,
+    type: Date,
+    default: Date.now,
   },
-  Profession:
-{
-  type: String,
-},
-number:{
-  type:Number,
-}
-})
-;
+  Profession: {
+    type: String,
+    trim: true,
+  },
+  number: {
+    type: Number,
+    validate: {
+      validator: function (v) {
+        return /^\d{10}$/.test(v);
+      },
+      message: props => `${props.value} is not a valid 10-digit number!`,
+    },
+    required: [true, "Phone number is required"],
+  },
+});
 
 module.exports = mongoose.model("User", userSchema);
