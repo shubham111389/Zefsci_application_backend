@@ -31,24 +31,17 @@ const userSchema = new mongoose.Schema({
     default: 0,
     min: [0, "Profession value cannot be negative"],
   },
-  gender: {
-    type: String,
-    enum: ["Male", "Female", "Other"],
-    required: [true, "Gender is required"],
-  },
+  
   region: {
     type: String,
     trim: true,
-    required: [true, "Region is required"],
+    //required: [true, "Region is required"],
   },
   joinedDate: {
     type: Date,
     default: Date.now,
   },
-  Profession: {
-    type: String,
-    trim: true,
-  },
+
   number: {
     type: Number,
     validate: {
@@ -57,7 +50,7 @@ const userSchema = new mongoose.Schema({
       },
       message: props => `${props.value} is not a valid 10-digit number!`,
     },
-    required: [true, "Phone number is required"],
+   // required: [true, "Phone number is required"],
   },
 });
 
