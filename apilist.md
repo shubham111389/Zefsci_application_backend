@@ -11,23 +11,27 @@
 - PATCH /profile/password // Forgot password API
 
 ## jobRegisterRouter
-- POST /job_register
-- GET /job_register
+- POST /send/job_register
+- GET /review/job_register
 
 ## jobRegisterRouter
-- POST /expense_register
-- GET /expense_register
+- POST /send/expense_register/:userId
+- GET /review/expense_register/:userId
 
 ## Leave Request Router
-- POST /leave_request
-- GET /leave_request
+- POST /send/leave_request/:userId
+- GET /review/leave_request/:userId
 
 ## Part Request Router
 
-- POST / Part_return
-- POST / Part_return
-- GET / Part_request
-- GET / Part_return
+- POST /send/Part_return/:userId
+- POST /send/ Part_request/:userId
+- GET /review/ Part_request/:userId
+- GET /review/ Part_return/:userId
 
+## userRouter
+- GET /user/connections
+- GET /user/requests
+- GET /user/feed - Gets you the profiles on the basis of your position .
 
 Status: ignored, interested, accepeted, rejected
