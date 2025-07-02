@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+
 const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
@@ -8,7 +9,7 @@ const userAuth = async (req, res, next) => {
       throw new Error("Token is not valid!!!!!!!!!");
     }
 
-    const decodedObj = await jwt.verify(token, "DEV@Tinder$790");
+    const decodedObj = await jwt.verify(token, "Zefsci@098765");
 
     const { _id } = decodedObj;
 
@@ -20,6 +21,7 @@ const userAuth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
+    console.error("Authentication error:", err);
     res.status(400).send("ERROR: " + err.message);
   }
 };
