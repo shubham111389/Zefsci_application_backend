@@ -3,23 +3,22 @@ const profileRouter = express.Router();
 
 const { userAuth } = require("../middlewares/auth");
 
-profileRouter.get("/profile", userAuth, async (req, res) => {
-    
-     try {
+const { validateEditProfileData } = require("../utils/validation");
+profileRouter.get("/profile/view", userAuth, async (req, res) => {
+  try {
     const user = req.user;
 
     res.send(user);
   } catch (err) {
     res.status(400).send("ERROR : " + err.message);
   }
-
 });
+
 
 profileRouter.delete("/user", async (req, res) => {
   const userId = req.body.userId;
   try {
     const user = await User.findByIdAndDelete({ _id: userId });
-    //const user = await User.findByIdAndDelete(userId);
 
     res.send("User deleted successfully");
   } catch (err) {
